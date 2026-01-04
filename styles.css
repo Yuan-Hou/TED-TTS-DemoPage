@@ -175,9 +175,9 @@ figcaption {
 .segment-pill {
   display: inline-flex;
   align-items: center;
-  border: 1px solid transparent;
-  border-radius: 999px;
-  padding: 4px 10px;
+  border: none;
+  border-radius: 0;
+  padding: 0;
   font-weight: 600;
   font-size: 0.86rem;
   line-height: 1.2;
@@ -206,13 +206,13 @@ figcaption {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 4px 10px;
-  border-radius: 10px;
-  background: #f0f5ff;
-  border: 1px solid #adc6ff;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  border: none;
   color: #1d39c4;
   font-weight: 600;
-  margin: 0 4px;
+  margin: 0 2px;
 }
 
 .duration-highlight__text {
@@ -220,13 +220,13 @@ figcaption {
 }
 
 .duration-badge {
-  background: #ffffff;
-  border: 1px solid #91caff;
-  border-radius: 999px;
-  padding: 2px 8px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
   font-size: 0.78rem;
-  color: #10239e;
-  font-weight: 700;
+  color: var(--muted);
+  font-weight: 600;
 }
 
 .footer {

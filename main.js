@@ -44,8 +44,6 @@ const createSegmentPill = (text, index, className) => {
   pill.className = className;
   pill.textContent = text;
   pill.style.color = color.text;
-  pill.style.background = color.bg;
-  pill.style.borderColor = color.border;
   return pill;
 };
 
