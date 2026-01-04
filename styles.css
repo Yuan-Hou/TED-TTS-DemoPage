@@ -121,7 +121,7 @@ figcaption {
 .table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 680px;
+  min-width: 980px;
 }
 
 .table th,
@@ -131,6 +131,8 @@ figcaption {
   vertical-align: top;
   text-align: left;
   font-size: 0.95rem;
+  white-space: normal;
+  overflow-wrap: break-word;
 }
 
 .table th {
@@ -159,6 +161,7 @@ figcaption {
 
 .audio-item audio {
   width: 100%;
+  min-width: 220px;
 }
 
 .footer {
@@ -182,4 +185,13 @@ code {
   .hero h1 {
     font-size: 1.8rem;
   }
+}
+.table th:first-child,
+.table td:first-child {
+  min-width: 150px;
+}
+
+.table th:nth-child(2),
+.table td:nth-child(2) {
+  min-width: 240px;
 }
