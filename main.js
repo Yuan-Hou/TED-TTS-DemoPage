@@ -21,6 +21,117 @@ const renderAudioList = (items) => {
   return wrapper;
 };
 
+const SEGMENT_COLORS = [
+  { text: "#b42318", bg: "#fff1f0", border: "#ffccc7" },
+  { text: "#096dd9", bg: "#e6f4ff", border: "#91caff" },
+  { text: "#7a1fa2", bg: "#f9f0ff", border: "#d3adf7" },
+  { text: "#237804", bg: "#f6ffed", border: "#b7eb8f" },
+  { text: "#ad6800", bg: "#fffbe6", border: "#ffe58f" },
+  { text: "#c41d7f", bg: "#fff0f6", border: "#ffadd2" },
+];
+
+const getSegmentColor = (index) => SEGMENT_COLORS[index % SEGMENT_COLORS.length];
+
+const splitSegments = (text, delimiter) =>
+  text
+    .split(delimiter)
+    .map((segment) => segment.trim())
+    .filter(Boolean);
+
+const createSegmentPill = (text, index, className) => {
+  const pill = document.createElement("span");
+  const color = getSegmentColor(index);
+  pill.className = className;
+  pill.textContent = text;
+  pill.style.color = color.text;
+  pill.style.background = color.bg;
+  pill.style.borderColor = color.border;
+  return pill;
+};
+
+const createSegmentedSequence = (segments, options = {}) => {
+  const { separator = "→", pillClass = "segment-pill" } = options;
+  const wrapper = document.createElement("div");
+  wrapper.className = "segment-sequence";
+
+  segments.forEach((segment, index) => {
+    wrapper.appendChild(createSegmentPill(segment, index, pillClass));
+    if (index < segments.length - 1) {
+      const divider = document.createElement("span");
+      divider.className = "segment-separator";
+      divider.textContent = separator;
+      wrapper.appendChild(divider);
+    }
+  });
+
+  return wrapper;
+};
+
+const createSegmentedText = (segments) => {
+  const wrapper = document.createElement("div");
+  wrapper.className = "segment-text";
+
+  segments.forEach((segment, index) => {
+    wrapper.appendChild(createSegmentPill(segment, index, "segment-pill segment-pill--text"));
+    if (index < segments.length - 1) {
+      const divider = document.createElement("span");
+      divider.className = "segment-divider";
+      divider.textContent = "|";
+      wrapper.appendChild(divider);
+    }
+  });
+
+  return wrapper;
+};
+
+const renderDurationText = (text) => {
+  const wrapper = document.createElement("div");
+  wrapper.className = "duration-text";
+
+  if (!text) {
+    wrapper.textContent = "-";
+    return wrapper;
+  }
+
+  const regex = /\[([^\]]+)\]/g;
+  let lastIndex = 0;
+  let match;
+
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      wrapper.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
+    }
+
+    const content = match[1].trim();
+    const multiplierMatch = content.match(/\(([^)]+)\)/);
+    const cleanText = content.replace(/\s*\([^)]*\)\s*/, " ").trim();
+
+    const highlight = document.createElement("span");
+    highlight.className = "duration-highlight";
+
+    const highlightText = document.createElement("span");
+    highlightText.className = "duration-highlight__text";
+    highlightText.textContent = cleanText || content;
+    highlight.appendChild(highlightText);
+
+    if (multiplierMatch) {
+      const badge = document.createElement("span");
+      badge.className = "duration-badge";
+      badge.textContent = multiplierMatch[1];
+      highlight.appendChild(badge);
+    }
+
+    wrapper.appendChild(highlight);
+    lastIndex = regex.lastIndex;
+  }
+
+  if (lastIndex < text.length) {
+    wrapper.appendChild(document.createTextNode(text.slice(lastIndex)));
+  }
+
+  return wrapper;
+};
+
 const renderTextList = (items) => {
   const wrapper = document.createElement("div");
   wrapper.className = "text-list";
@@ -78,10 +189,20 @@ const renderEmotionExamples = (data) => {
     const row = document.createElement("tr");
 
     const sequenceCell = document.createElement("td");
-    sequenceCell.textContent = item.emotion_sequence || "-";
+    if (item.emotion_sequence) {
+      const segments = splitSegments(item.emotion_sequence, "->");
+      sequenceCell.appendChild(createSegmentedSequence(segments));
+    } else {
+      sequenceCell.textContent = "-";
+    }
 
     const textCell = document.createElement("td");
-    textCell.textContent = item.text || "-";
+    if (item.text) {
+      const segments = splitSegments(item.text, "|");
+      textCell.appendChild(createSegmentedText(segments));
+    } else {
+      textCell.textContent = "-";
+    }
 
     const referenceCell = document.createElement("td");
     if (item.reference_audio) {
@@ -141,7 +262,7 @@ const renderDurationExamples = (data) => {
     const row = document.createElement("tr");
 
     const textCell = document.createElement("td");
-    textCell.textContent = item.text || "-";
+    textCell.appendChild(renderDurationText(item.text || "-"));
 
     const referenceCell = document.createElement("td");
     if (item.reference_audio) {
