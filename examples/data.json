@@ -135,14 +135,14 @@
     ],
     "duration": [
         {
-            "text": "Is it so hard to understand my point? [Your silence cuts deeper than any harsh words could. (1.125×)]",
-            "reference_audio": "./examples/audio/d1-ref.wav",
-            "original_audio": "./examples/audio/d1-original.wav",
-            "output_audio": "./examples/audio/d1-out-ours.wav",
+            "text": "[Is that a broken promise in your hand? (0.75x)] My heart sinks with dread, and shadows loom in my mind.",
+            "reference_audio": "./examples/audio/d4-ref.wav",
+            "original_audio": "./examples/audio/d4-original.wav",
+            "output_audio": "./examples/audio/d4-out-ours.wav",
             "baseline_audio": {
-                "F5-TTS": "./examples/audio/d1-out-f5tts.wav",
-                "MaskGCT": "./examples/audio/d1-out-maskgct.wav",
-                "IndexTTS-2": "./examples/audio/d1-out-indextts.wav"
+                "F5-TTS": "./examples/audio/d4-out-f5tts.wav",
+                "MaskGCT": "./examples/audio/d4-out-maskgct.wav",
+                "IndexTTS-2": "./examples/audio/d4-out-indextts.wav"
             }
         },
         {
@@ -157,6 +157,17 @@
             }
         },
         {
+            "text": "Is it so hard to understand my point? [Your silence cuts deeper than any harsh words could. (1.125×)]",
+            "reference_audio": "./examples/audio/d1-ref.wav",
+            "original_audio": "./examples/audio/d1-original.wav",
+            "output_audio": "./examples/audio/d1-out-ours.wav",
+            "baseline_audio": {
+                "F5-TTS": "./examples/audio/d1-out-f5tts.wav",
+                "MaskGCT": "./examples/audio/d1-out-maskgct.wav",
+                "IndexTTS-2": "./examples/audio/d1-out-indextts.wav"
+            }
+        },
+        {
             "text": "Clouds gather like old regrets, a flash of light splits the sky, [and calmness returns with each raindrop's descent. (1.25×)]",
             "reference_audio": "./examples/audio/d3-ref.wav",
             "original_audio": "./examples/audio/d3-original.wav",
@@ -165,17 +176,6 @@
                 "F5-TTS": "./examples/audio/d3-out-f5tts.wav",
                 "MaskGCT": "./examples/audio/d3-out-maskgct.wav",
                 "IndexTTS-2": "./examples/audio/d3-out-indextts.wav"
-            }
-        },
-        {
-            "text": "[Is that a broken promise in your hand? (0.75x)] My heart sinks with dread, and shadows loom in my mind.",
-            "reference_audio": "./examples/audio/d4-ref.wav",
-            "original_audio": "./examples/audio/d4-original.wav",
-            "output_audio": "./examples/audio/d4-out-ours.wav",
-            "baseline_audio": {
-                "F5-TTS": "./examples/audio/d4-out-f5tts.wav",
-                "MaskGCT": "./examples/audio/d4-out-maskgct.wav",
-                "IndexTTS-2": "./examples/audio/d4-out-indextts.wav"
             }
         }
     ]

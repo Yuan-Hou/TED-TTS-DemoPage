@@ -304,3 +304,84 @@ code {
 .table td:nth-child(2) {
   min-width: 240px;
 }
+
+.figure-block {
+  margin-top: 16px;
+}
+
+.figure-block summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.figure-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 16px;
+}
+
+.figure-grid figure {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.figure-grid img {
+  width: 100%;
+  height: 320px;            
+  object-fit: contain;     
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.figure-grid figcaption {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #4b5563;
+}
+
+
+@media (max-width: 768px) {
+  .figure-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .figure-grid img {
+    height: 260px;
+  }
+}
+
+/* 表头统一居中 */
+.table th {
+  text-align: center;
+  font-weight: 600;
+}
+
+/* 表格内容默认左对齐 */
+.table td {
+  text-align: left;
+}
+
+/* 音频列单独居中 */
+.table td audio {
+  display: block;
+  margin: 0 auto;
+}
+
+.table-caption {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #6b7280;
+  text-align: justify;       
+}
+
+.caption-icon {
+  margin-right: 6px;
+}
+

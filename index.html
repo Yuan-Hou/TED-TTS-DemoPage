@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Training-Free Intra-Utterance Control for Zero-Shot TTS</title>
+  <title>TED-TTS DemoPage</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="hero">
     <div class="container">
-      <p class="eyebrow">Training-Free Intra-Utterance Control for Zero-Shot TTS</p>
-      <h1>Demo Page</h1>
+      <p class="eyebrow">Training-Free · Intra-Utterance Control · Zero-Shot TTS</p>
+      <h1>TED-TTS: Training-Free Intra-Utterance Emotion and Duration Control for Text-to-Speech Synthesis</h1>
     </div>
   </header>
 
@@ -18,81 +18,114 @@
     <section class="card" id="abstract">
       <h2>Abstract</h2>
       <p>
-        While controllable Text-to-Speech (TTS) has achieved notable progress, most existing methods remain
-        limited to inter-utterance-level control, making fine-grained intra-utterance expression challenging
-        due to their reliance on non-public datasets or complex multi-stage training. In this paper, we
-        propose a training-free controllable framework for pretrained zero-shot TTS to enable intra-utterance
-        emotion and duration expression. Specifically, we propose a segment-aware emotion conditioning
-        strategy that combines causal masking with monotonic stream alignment filtering to isolate emotion
-        conditioning and schedule mask transitions, enabling smooth intra-utterance emotion shifts while
-        preserving global semantic coherence. Based on this, we further propose a segment-aware duration
-        steering strategy to combine local duration embedding steering with global EOS logit modulation,
-        allowing local duration adjustment while ensuring globally consistent termination. To eliminate the
-        need for segment-level manual prompt engineering, we construct a 30,000-sample multi-emotion and
-        duration-annotated text dataset to enable LLM-based automatic prompt construction. Extensive
-        experiments demonstrate that our training-free method achieves state-of-the-art intra-utterance
-        consistency in multi-emotion and duration control, while maintaining baseline-level speech quality of
-        the underlying TTS model.
+        While controllable Text-to-Speech (TTS) has achieved notable progress, most existing methods remain limited to inter-utterance-level control, 
+        making fine-grained intra-utterance expression challenging due to their reliance on non-public datasets or complex multi-stage training. 
+        In this paper, we propose TED-TTS, a training-free controllable framework for pretrained zero-shot TTS to enable intra-utterance emotion and duration expression. 
+        Specifically, we propose a segment-aware emotion conditioning strategy that combines causal masking with monotonic stream alignment filtering to isolate emotion conditioning and schedule mask transitions, 
+        enabling smooth intra-utterance emotion shifts while preserving global semantic coherence. Based on this, 
+        we further propose a segment-aware duration steering strategy to combine local duration embedding steering with global EOS logit modulation, 
+        allowing local duration adjustment while ensuring globally consistent termination. To eliminate the need for segment-level manual prompt engineering, 
+        we construct a 30,000-sample multi-emotion and duration-annotated text dataset to enable LLM-based automatic prompt construction. 
+        Extensive experiments demonstrate that our training-free method not only achieves state-of-the-art intra-utterance consistency in multi-emotion and duration control, 
+        but also maintains baseline-level speech quality of the underlying TTS model.
       </p>
     </section>
 
-    <section class="card" id="figures">
-      <h2>Method Figures</h2>
-      <div class="figure-accordion">
-        <details open>
-          <summary>Training-free framework overview</summary>
-          <figure>
-            <img src="imgs/intro.png" alt="Overview of training-free framework" />
-            <figcaption>
-              Overview of our training-free framework for fine-grained intra-utterance emotion and duration
-              control, illustrating the transition from the second to the third segment via segment-aware
-              duration steering (left) and segment-aware emotion conditioning (right).
-            </figcaption>
-          </figure>
-        </details>
-        <details>
-          <summary>Monotonic Stream Alignment details</summary>
-          <figure>
-            <img src="imgs/emotion_control.png" alt="Detailed illustration of Monotonic Stream Alignment" />
-            <figcaption>
-              Detailed illustration of Monotonic Stream Alignment (MSA) in segment-aware duration steering,
-              where from top to bottom are MSA algorithm, MSA alignment result, and 2D causal attention mask,
-              respectively.
-            </figcaption>
-          </figure>
-        </details>
+  <section class="card" id="figures">
+    <h2>Framework Overview</h2>
+
+    <details open class="figure-block">
+      <summary>Task Definition (Left) and Technical Architecture Overview (Right)</summary>
+
+      <div class="figure-grid">
+        <figure>
+          <img src="imgs/Intro.png" alt="Task Definition" />
+          <figcaption>
+          Overview of our training-free framework for intra-utterance emotion and duration control, 
+          where the <span style="color: #237804; font-weight:600;">green</span>, <span style="color: #b42318; font-weight:600;">red</span>, and <span style="color: #096dd9; font-weight:600;">blue</span> regions denote three segments with different emotion 
+          and duration settings within the same utterance.
+          </figcaption>
+        </figure>
+
+        <figure>
+          <img src="imgs/Method.png" alt="Detailed illustration of Monotonic Stream Alignment" />
+          <figcaption>
+          Overview of our training-free framework for fine-grained intra-utterance emotion and duration control, 
+          illustrating the transition from the second (<span style="color: #b42318; font-weight:600;">red</span>) segment to the third (<span style="color: #096dd9; font-weight:600;">blue</span>) segment via segment-aware duration steering (left) 
+          and segment-aware emotion conditioning (right) strategy.
+          </figcaption>
+        </figure>
       </div>
-    </section>
+    </details>
+  </section>
 
     <section class="card" id="examples">
       <div class="section-header">
-        <h2>Examples</h2>
+        <h2>Audio Examples</h2>
       </div>
 
       <div class="examples-block">
-        <h3>Intra-Utterance Emotion Control</h3>
+        <h3>1. Intra-Utterance Emotion Control</h3>
         <div class="emotion-tables">
           <div class="emotion-table">
-            <h4>Speech prompt</h4>
+            <h4>(a) Speech-Referenced Emotion Prompt</h4>
             <div id="emotion-table-audio" class="table-wrap"></div>
           </div>
+            <p class="table-caption">
+                <span class="caption-icon">💡</span>
+            The above audio samples present comparative results for intra-utterance multi-emotion control using speech-referenced emotion prompts.
+            Since comparative methods lack intra-utterance controllability, all segments are synthesized
+            independently and concatenated for evaluation.
+            <u>Our method demonstrates smooth and coherent emotion transitions within a single utterance,
+            along with consistent speaker similarity across segments, where subtle breath sounds at
+            segment boundaries can also be perceived.</u>
+            Although baseline methods show strong emotion preservation at the segment level, this advantage
+            largely stems from their independent segment synthesis setting.
+            In contrast, our method <u>performs multi-segment emotion control within a single generation</u>,
+            which makes emotion category preservation more challenging but better reflects realistic
+            controllable speech synthesis scenarios.
+            </p>
           <div class="emotion-table">
-            <h4>Text prompt</h4>
+            <h4>(b) Text-Referenced Emotion Prompt</h4>
             <div id="emotion-table-text" class="table-wrap"></div>
+            <p class="table-caption">
+               <span class="caption-icon">💡</span>
+            The above audio samples present comparative results for intra-utterance multi-emotion control
+              using text-referenced emotion prompts.
+              Compared with speech-based emotion prompting, extracting emotion cues from natural language
+              descriptions is considerably more challenging.
+              Despite this increased difficulty, our method still demonstrates
+              <u>smooth intra-utterance emotion transitions,
+              consistent speaker timbre across segments, and
+              strong multi-emotion controllability within a single utterance.</u>
+            </p>
           </div>
         </div>
       </div>
 
       <div class="examples-block">
-        <h3>Segment-Level Duration Control</h3>
+        <h3>2. Intra-Utterance Duration Control</h3>
         <div id="duration-table" class="table-wrap"></div>
+            <p class="table-caption">
+               <span class="caption-icon">💡</span>
+                The above audio samples present comparative results for intra-utterance duration control using speech-referenced emotion prompts.
+                  For duration control experiments, the emotion category is fixed to neutral,
+                  and segment-level speech synthesis is evaluated under four duration scaling
+                  factors (×0.75, ×0.875, ×1.125, and ×1.25).
+                  The results show that, after extending controllability to duration,
+                  our method consistently preserves smooth intra-utterance transitions and
+                  coherent speaker timbre across segments.
+                  Moreover, our framework enables flexible duration adjustment for a target
+                  segment while keeping other segments unchanged, demonstrating strong
+                  training-free controllability within an autoregressive TTS framework.
+            </p>
       </div>
     </section>
   </main>
 
   <footer class="footer">
     <div class="container">
-      <p>© 2024 Training-Free Intra-Utterance Control Demo.</p>
+      <p>© 2025 TED-TTS: Training-Free Intra-Utterance Emotion and Duration Control for Text-to-Speech Synthesis.</p>
     </div>
   </footer>
 

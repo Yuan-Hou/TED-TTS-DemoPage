@@ -118,9 +118,15 @@ const renderDurationText = (text) => {
     if (multiplierMatch) {
       const badge = document.createElement("span");
       badge.className = "duration-badge";
-      badge.textContent = multiplierMatch[1];
+      const factorMatch = multiplierMatch[1].match(/[\d.]+/);
+      const factor = factorMatch ? factorMatch[0] : multiplierMatch[1];
+
+      badge.textContent = `⏱ Duration ×${factor}`;
+      badge.title = "Duration scaling factor";
+
       highlight.appendChild(badge);
     }
+
 
     wrapper.appendChild(highlight);
     lastIndex = regex.lastIndex;
@@ -269,8 +275,8 @@ const renderDurationExamples = (data) => {
 
   const { table, tbody } = createTable([
     "Text",
-    "Reference",
-    "Original",
+    "Timbre Reference",
+    "Original Duration",
     "Ours",
     "Baselines",
   ]);
