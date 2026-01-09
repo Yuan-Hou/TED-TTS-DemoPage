@@ -2,20 +2,20 @@
     "emotion": [
         {
             "mode": "audio",
-            "emotion_sequence": "Angry -> Happy -> Neutral",
-            "text": "You missed the deadline again!  | But, seeing your efforts brightens my day.  | Let's discuss the next steps calmly.",
+            "emotion_sequence": "Sad -> Angry -> Disgusted",
+            "text": "Watching you walk away felt like losing the sun,  | Do you even care?   | You're just so... revolting.",
             "reference_audio": {
-                "Angry": "./examples/audio/1-ref-1-angry.wav",
-                "Happy": "./examples/audio/1-ref-2-happy.wav",
-                "Neutral": "./examples/audio/1-ref-3-neutral.wav"
+                "Sad": "./examples/audio/1.5-ref-1-sad.wav",
+                "Angry": "./examples/audio/1.5-ref-2-angry.wav",
+                "Disgusted": "./examples/audio/1.5-ref-3-disgusted.wav"
             },
-            "output_audio": "./examples/audio/1-out-ours.wav",
+            "output_audio": "./examples/audio/1.5-out-ours.wav",
             "baseline_audio": {
-                "CosyVoice2": "./examples/audio/1-out-cosy.wav",
-                "IndexTTS-2": "./examples/audio/1-out-indextts.wav",
-                "MaskGCT": "./examples/audio/1-out-maskgct.wav",
-                "SparkTTS": "./examples/audio/1-out-sparktts.wav",
-                "F5-TTS": "./examples/audio/1-out-f5tts.wav"
+                "CosyVoice2": "./examples/audio/1.5-out-cosy.wav",
+                "IndexTTS-2": "./examples/audio/1.5-out-indextts.wav",
+                "MaskGCT": "./examples/audio/1.5-out-maskgct.wav",
+                "SparkTTS": "./examples/audio/1.5-out-sparktts.wav",
+                "F5-TTS": "./examples/audio/1.5-out-f5tts.wav"
             }
         },
         {
